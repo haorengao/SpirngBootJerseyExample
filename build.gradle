@@ -1,0 +1,61 @@
+group 'com.avol.spirngboot.jersey'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '1.2.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+    configurations {
+        compile.exclude module: "spring-boot-starter-tomcat"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'spring-boot'
+apply plugin: 'eclipse'
+
+
+jar {
+    baseName = 'spring-boot-jersey-example'
+    version = version
+}
+//1.8 is must.
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //Spring boot dependencies.
+    compile("org.springframework.boot:spring-boot-starter-undertow")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-jersey")
+    //HateOAS support.
+    compile 'org.springframework.boot:spring-boot-starter-hateoas'
+    //compile("org.springframework.hateoas:spring-hateoas:0.16.0.RELEASE")
+    // needed when @EnableEntityLinks is used
+    compile("org.springframework.plugin:spring-plugin-core:1.1.0.RELEASE")
+
+    //hsql embedded db support.
+    compile 'org.hsqldb:hsqldb:2.3.2'
+
+    //lombok
+    compile "org.projectlombok:lombok:1.16.2"
+
+    //test dependencies
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
