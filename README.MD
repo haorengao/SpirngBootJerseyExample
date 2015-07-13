@@ -13,7 +13,9 @@
   
 #How to import into IDE?  
  Clone the project and get into the root directory and run the below command.  
-  <code>$gradle eclipse</code>  
+
+  ```$gradle eclipse```  
+  
  It generates the eclipse .project and .classpath files, you are good to import now.  
  
 #How to run.?  
@@ -23,32 +25,32 @@
 
     <code>gradle build</code>  
 
-  It builds the application and prepares the artifacts, artifacts can be found in ** /build/distributions ** dir.  
+  It builds the application and prepares the artifacts, artifacts can be found in ** \/build\/distributions ** dir.  
   
 ##To Run from shell/command tool: 
   
-    1. Get inside the ** build/distributions ** dir and unzip the ** SpringBootJerseyExample-<version>.zip **.  
+    1. Get inside the **build\/distributions** dir and unzip the ** SpringBootJerseyExample-<version>.zip **.  
     2. Get into the ** SpringBootJerseyExample-<version>/bin ** directory and use either <b>bat/.sh<b> file to run from the cmd/shell.  
      
         Note: Windows user has to suppress the classpath in bat file prior to run.
-              Replace the classpath entry with "set CLASSPATH=%APP_HOME%\lib\*" (without quotes)
+              Replace the classpath entry with "set CLASSPATH=%APP_HOME%\\lib\\*" (without quotes)
          
 ##To Run from IDE.  
   
     1. if you have gradle plugin in eclipse, gradle window is the best choice to run different tasks.  
-    2. To run the server open <code>JerseyApplication.java</code> and run as java application.  
+    2. To run the server open ```JerseyApplication.java``` and run as java application.  
     
 ##To Run test cases.  
   
-    Open <code>JerseyApplicationTest.java</code> class highlight the test method you want to run and run as Junit test.  
+    Open ```JerseyApplicationTest.java``` class highlight the test method you want to run and run as Junit test.  
     
   
-#Sample Json request body.  
-  <code>
+#Sample Json request body. 
+```
   {  
       "code":"12334",  
       "areaName":"area name"  
-  }
-  </code>
+  } 
+```
   
   
