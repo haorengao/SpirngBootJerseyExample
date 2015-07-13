@@ -17,16 +17,18 @@
  It generates the eclipse .project and .classpath files, you are good to import now.  
  
 #How to run.?  
-##To build: Clone the repository, Get inside the root directory and then run the below command.  
+##To build: 
+
+  Clone the repository, Get inside the root directory and then run the below command.  
 
     <code>gradle build</code>  
 
-  It builds the application and prepares the artifacts, artifacts can be found in **/build/distributions** dir.  
+  It builds the application and prepares the artifacts, artifacts can be found in ** /build/distributions ** dir.  
   
 ##To Run from shell/command tool: 
   
-    1. Get inside the **build/distributions** dir and unzip the **SpringBootJerseyExample-<version>.zip**.  
-    2. Get into the **SpringBootJerseyExample-<version>/bin** directory and use either <b>bat/.sh<b> file to run from the cmd/shell.  
+    1. Get inside the ** build/distributions ** dir and unzip the ** SpringBootJerseyExample-<version>.zip **.  
+    2. Get into the ** SpringBootJerseyExample-<version>/bin ** directory and use either <b>bat/.sh<b> file to run from the cmd/shell.  
      
         Note: Windows user has to suppress the classpath in bat file prior to run.
               Replace the classpath entry with "set CLASSPATH=%APP_HOME%\lib\*" (without quotes)
