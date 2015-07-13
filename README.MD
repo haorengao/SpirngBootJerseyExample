@@ -17,34 +17,36 @@
  It generates the eclipse .project and .classpath files, you are good to import now.  
  
 #How to run.?  
-  To build: Clone the repository, Get inside the root directory and then run the below command.  
+  ###To build: Clone the repository, Get inside the root directory and then run the below command.  
 
     <code>gradle build</code>  
 
-  It builds the application and prepares the artifacts, artifacts can be found in <b> /build/distributions </b> dir.  
+  It builds the application and prepares the artifacts, artifacts can be found in **/build/distributions** dir.  
   
-  To Run from shell/command tool: 
+  ###To Run from shell/command tool: 
   
-    1. Get inside the <b>build/distributions</b> dir and unzip the SpringBootJerseyExample-<version>.zip.  
-    2. Get into the <b>SpringBootJerseyExample-<version>/bin</b> directory and use either <b>bat/.sh<b> file to run from the cmd/shell.  
+    1. Get inside the **build/distributions** dir and unzip the **SpringBootJerseyExample-<version>.zip**.  
+    2. Get into the **SpringBootJerseyExample-<version>/bin** directory and use either <b>bat/.sh<b> file to run from the cmd/shell.  
      
         Note: Windows user has to suppress the classpath in bat file prior to run.
               Replace the classpath entry with "set CLASSPATH=%APP_HOME%\lib\*" (without quotes)
          
-  To Run from IDE.  
+  ###To Run from IDE.  
   
     1. if you have gradle plugin in eclipse, gradle window is the best choice to run different tasks.  
     2. To run the server open <code>JerseyApplication.java</code> and run as java application.  
     
-  To Run test cases.  
+  ###To Run test cases.  
   
     Open <code>JerseyApplicationTest.java</code> class highlight the test method you want to run and run as Junit test.  
     
   
 #Sample Json request body.  
-  <code>{  
+  <code>
+  {  
       "code":"12334",  
       "areaName":"area name"  
-  }</code>
+  }
+  </code>
   
   
