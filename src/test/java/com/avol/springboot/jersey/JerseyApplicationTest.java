@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = JerseyApplication.class)
-@WebIntegrationTest("server.port:0")
+@WebIntegrationTest(value = "server.address=localhost", randomPort = true)
 public class JerseyApplicationTest {
 
     private RestTemplate restTemplate = null;
