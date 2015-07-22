@@ -16,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.avol.springboot.jersey.service",
         "com.avol.springboot.jersey.repository"})
 @EntityScan(basePackages = "com.avol.springboot.jersey.domain")
+//@EnableAutoConfiguration
 public class JerseyApplication {
 
     @Bean

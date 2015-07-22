@@ -43,7 +43,10 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-hateoas'
     //compile("org.springframework.hateoas:spring-hateoas:0.16.0.RELEASE")
     // needed when @EnableEntityLinks is used
-    compile("org.springframework.plugin:spring-plugin-core:1.1.0.RELEASE")
+    //compile("org.springframework.plugin:spring-plugin-core:1.1.0.RELEASE")
+
+    //Actuator to get the health check and metrics.
+    compile 'org.springframework.boot:spring-boot-starter-actuator:1.2.3.RELEASE'
 
     //hsql embedded db support.
     compile 'org.hsqldb:hsqldb:2.3.2'
