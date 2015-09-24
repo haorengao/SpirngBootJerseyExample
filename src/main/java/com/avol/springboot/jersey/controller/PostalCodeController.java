@@ -40,58 +40,77 @@ public class PostalCodeController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(@Valid PostalCode postalCode) {
-        Long id = postalCodeService.save(ObjectTransferUtil.postalCodeDomain(postalCode));
-        JerseyResponse jerseyResponse = JerseyResponse.builder()
-                .withStatusCode(Response.Status.CREATED.getStatusCode())
-                .withMessage("Request processed successfully.").build();
-
-        Resource resource = new Resource<JerseyResponse>(jerseyResponse);
-        resource.add(JaxRsLinkBuilder.linkTo(PostalCodeController.class).slash(id).withSelfRel());
-        return Response.status(Response.Status.CREATED).entity(resource).build();
+        try{
+            postalCode.setAreaName(null);
+            postalCode.getAreaName().length();
+            Long id = postalCodeService.save(ObjectTransferUtil.postalCodeDomain(postalCode));
+            JerseyResponse jerseyResponse = JerseyResponse.builder()
+                    .withStatusCode(Response.Status.CREATED.getStatusCode())
+                    .withMessage("Request processed successfully.").build();
+            Resource resource = new Resource<JerseyResponse>(jerseyResponse);
+            resource.add(JaxRsLinkBuilder.linkTo(PostalCodeController.class).slash(id).withSelfRel());
+            return Response.status(Response.Status.CREATED).entity(resource).build();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") final Long id) {
-        PostalCodeDomain postalCodeDomain = postalCodeService.findById(id);
-        JerseyResponse jerseyResponse = JerseyResponse.builder()
-                .withStatusCode(Response.Status.OK.getStatusCode())
-                .withMessage("Request processed successfully.")
-                .withPostalCode(ObjectTransferUtil.postalCode(postalCodeDomain)).build();
-        Resource resource = new Resource<JerseyResponse>(jerseyResponse);
-        resource.add(JaxRsLinkBuilder.linkTo(PostalCodeController.class).slash("/list").withSelfRel());
-        return Response.status(Response.Status.OK).entity(resource).build();
+        try {
+            PostalCodeDomain postalCodeDomain = postalCodeService.findById(id);
+            JerseyResponse jerseyResponse = JerseyResponse.builder()
+                    .withStatusCode(Response.Status.OK.getStatusCode())
+                    .withMessage("Request processed successfully.")
+                    .withPostalCode(ObjectTransferUtil.postalCode(postalCodeDomain)).build();
+            Resource resource = new Resource<JerseyResponse>(jerseyResponse);
+            resource.add(JaxRsLinkBuilder.linkTo(PostalCodeController.class).slash("/list").withSelfRel());
+            return Response.status(Response.Status.OK).entity(resource).build();
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
     @GET
     @Path("/list")
     public Response findAll() {
-        List<PostalCodeDomain> postalCodeDomainList = postalCodeService.findAll();
-        JerseyResponse jerseyResponse = JerseyResponse.builder()
-                .withStatusCode(Response.Status.OK.getStatusCode())
-                .withMessage("Request processed successfully.")
-                .withPostalCodes(postalCodeDomainList.stream().map(postalCodeDomain ->
-                        ObjectTransferUtil.postalCode(postalCodeDomain)).collect(Collectors.toList()))
-                .build();
-        Resource resource = new Resource<JerseyResponse>(jerseyResponse);
-        if (jerseyResponse.getPostalCodes() != null) {
-            jerseyResponse.getPostalCodes().stream()
-                    .forEach(postalCode ->
-                            resource.add(JaxRsLinkBuilder.linkTo(PostalCodeController.class).slash(postalCode.getId())
-                                    .withSelfRel()));
+        try {
+            List<PostalCodeDomain> postalCodeDomainList = postalCodeService.findAll();
+            JerseyResponse jerseyResponse = JerseyResponse.builder()
+                    .withStatusCode(Response.Status.OK.getStatusCode())
+                    .withMessage("Request processed successfully.")
+                    .withPostalCodes(postalCodeDomainList.stream().map(postalCodeDomain ->
+                            ObjectTransferUtil.postalCode(postalCodeDomain)).collect(Collectors.toList()))
+                    .build();
+            Resource resource = new Resource<JerseyResponse>(jerseyResponse);
+            if (jerseyResponse.getPostalCodes() != null) {
+                jerseyResponse.getPostalCodes().stream()
+                        .forEach(postalCode ->
+                                resource.add(JaxRsLinkBuilder.linkTo(PostalCodeController.class).slash(postalCode.getId())
+                                        .withSelfRel()));
+            }
+            return Response.status(Response.Status.OK).entity(resource).build();
+        } catch (Exception e) {
+            throw e;
         }
-        return Response.status(Response.Status.OK).entity(resource).build();
     }
 
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") final Long id) {
-        postalCodeService.delete(id);
-        JerseyResponse jerseyResponse = JerseyResponse.builder()
-                .withStatusCode(Response.Status.OK.getStatusCode())
-                .withMessage("Request processed successfully.").build();
-        Resource resource = new Resource<JerseyResponse>(jerseyResponse);
-        resource.add(JaxRsLinkBuilder.linkTo(PostalCodeController.class).withSelfRel());
-        return Response.status(Response.Status.OK).entity(resource).build();
+        try {
+            postalCodeService.delete(id);
+            JerseyResponse jerseyResponse = JerseyResponse.builder()
+                    .withStatusCode(Response.Status.OK.getStatusCode())
+                    .withMessage("Request processed successfully.").build();
+            Resource resource = new Resource<JerseyResponse>(jerseyResponse);
+            resource.add(JaxRsLinkBuilder.linkTo(PostalCodeController.class).withSelfRel());
+            return Response.status(Response.Status.OK).entity(resource).build();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

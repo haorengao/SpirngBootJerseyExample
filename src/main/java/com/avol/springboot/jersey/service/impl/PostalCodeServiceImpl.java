@@ -24,7 +24,6 @@ public class PostalCodeServiceImpl implements PostalCodeService {
     @Transactional(propagation = Propagation.REQUIRED)
     public Long save(PostalCodeDomain postalCodeDomain) {
         postalCodeDomain = postalCodeRepository.save(postalCodeDomain);
-        System.out.println("PostalCodeServiceImpl.save.. " + postalCodeDomain.getId());
         return postalCodeDomain.getId();
     }
 
