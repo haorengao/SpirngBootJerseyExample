@@ -10,10 +10,14 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.hateoas.Link;
+import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import javax.ws.rs.core.Response;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -45,8 +49,7 @@ public class JerseyApplicationTest {
     public void testCreate() {
 
         JerseyResponse response = restTemplate.postForObject(baseURL, postalCode("560027", "WilsonGarden"),
-                JerseyResponse.class, new Object[]{});
-
+                JerseyResponse.class);
         assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatusCode());
         assertNotNull(response.getLinks());
     }
@@ -88,5 +91,20 @@ public class JerseyApplicationTest {
         postalCode.setCode(code);
         postalCode.setAreaName(areaName);
         return postalCode;
+    }
+
+    @Test
+    public void testRequestParams() {
+        Map<String , Object> map = new HashMap<String, Object>(){
+            {
+                put("Name", "Lova");
+                put("Age", 28);
+            }
+        };
+        restTemplate.setMessageConverters(Arrays.asList(new FormHttpMessageConverter()));
+        JerseyResponse response = restTemplate.postForObject(baseURL + "/testRequestParams",
+                map,JerseyResponse.class);
+        System.out.println("JerseyApplicationTest.testRequestParams" + response.getStatusCode());
+        assertEquals(response.getStatusCode(), Response.Status.OK.getStatusCode());
     }
 }

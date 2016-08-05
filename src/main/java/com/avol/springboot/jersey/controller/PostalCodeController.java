@@ -20,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -41,7 +42,6 @@ public class PostalCodeController {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(@Valid PostalCode postalCode) {
         try{
-            postalCode.setAreaName(null);
             postalCode.getAreaName().length();
             Long id = postalCodeService.save(ObjectTransferUtil.postalCodeDomain(postalCode));
             JerseyResponse jerseyResponse = JerseyResponse.builder()
@@ -112,5 +112,17 @@ public class PostalCodeController {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    @POST
+    @Path("/testRequestParams")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response testRequestParams(Map<String, Object> name) {
+        System.out.println("PostalCodeController.testRequestParams::: name: " + name );
+        JerseyResponse jerseyResponse = JerseyResponse.builder()
+                .withStatusCode(Response.Status.OK.getStatusCode())
+                .withMessage("Request processed successfully.").build();
+        Resource resource = new Resource<JerseyResponse>(jerseyResponse);
+        return Response.status(Response.Status.OK).entity(resource).build();
     }
 }
